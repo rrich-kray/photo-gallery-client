@@ -1,0 +1,16 @@
+.toggle-btn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top: 2.5%;
+  right: 5%;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  /* background: black; */
+}
+
+.toggle-btn img {
+  max-height: 95%;
+  max-width: 95%;
+}

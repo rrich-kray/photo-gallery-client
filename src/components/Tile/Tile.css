@@ -1,0 +1,33 @@
+.image-tile {
+  width: 100%;
+  height: auto;
+}
+
+.image-tile img {
+  max-height: 100%;
+  max-width: 100%;
+  /* object-fit: fill; */
+}
+
+.tile-content-container {
+  height: 100%;
+  width: 100%;
+  padding: 50px;
+  background: rgba(66, 64, 64, 0.5);
+  opacity: 0;
+  cursor: pointer;
+  transition: 0.25s linear;
+}
+
+.tile-content-container:hover {
+  opacity: 1;
+}
+
+.tile-content-container h1 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.tile-content-container p {
+  color: white;
+}

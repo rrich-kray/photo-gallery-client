@@ -1,0 +1,25 @@
+.dashboard {
+  /* height: calc(100% - 150px); */
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.dashboard-nav {
+  height: 75px;
+  width: 100%;
+}
+
+.dashboard-nav-center-container {
+  width: 500px;
+  height: 100%;
+}
+
+.photo-container {
+  height: calc(100% - 75px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 500px);
+  grid-template-rows: repeat(1fr);
+}

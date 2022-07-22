@@ -1,0 +1,14 @@
+.post {
+  height: 75vh;
+  width: 75vw;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.post-left-panel {
+  flex: 1;
+}
+
+.post-right-container {
+  flex: 1;
+}

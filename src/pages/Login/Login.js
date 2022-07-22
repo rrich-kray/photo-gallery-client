@@ -4,6 +4,10 @@ import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
 import './Login.css';
 
+// Server is returning undefined token in production
+// The fact that a token is being created at all implies the server received the request and attempted to create a token using the data provided.
+// So route is correct.
+// That implies a problem with the data being sent.
 const Login = ({ baseUrl }) => {
   const [formState, setFormState] = useState({
     email: '',

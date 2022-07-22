@@ -14,10 +14,7 @@ import {
 } from 'react-router-dom';
 
 function App() {
-  const baseUrl =
-    process.env.NODE_ENV === 'production'
-      ? 'https://photo-gallery-server-rrich.herokuapp.com'
-      : 'http://localhost:3001';
+  const baseUrl = 'https://photo-gallery-server-rrich.herokuapp.com';
   const { user } = useAuth();
   console.log(user);
   const token = localStorage.getItem('token');

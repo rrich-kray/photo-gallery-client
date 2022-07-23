@@ -12,8 +12,8 @@ const Register = ({ baseUrl }) => {
     password: '',
   });
   console.log(formState)
-  // No token being created
-  formState
+  // No token being created. Server not logging user creation process. Implies issue with frontend
+  // formState logging correct value
 
   const { login } = useAuth();
 

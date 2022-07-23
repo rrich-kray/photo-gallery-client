@@ -46,6 +46,7 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const login = (userData) => {
+    console.log(userData)
     localStorage.setItem('token', userData.token);
     // window.location.replace('/dashboard');
     dispatch({

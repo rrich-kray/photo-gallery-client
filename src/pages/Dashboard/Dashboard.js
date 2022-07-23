@@ -51,7 +51,7 @@ const Dashboard = ({ baseUrl }) => {
           toggleModal={toggleModal}
         />
       )}
-      {isModalVisible && <Modal userId={userId} />}
+      {isModalVisible && <Modal userId={userId} baseUrl={baseUrl}/>}
       <ToggleButton toggleNav={toggleNav} />
       <div className="photo-container">
         {posts.map((post) => (

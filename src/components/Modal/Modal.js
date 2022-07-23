@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Modal.css';
 
-const Modal = ({ userId }) => {
+const Modal = ({ userId, baseUrl }) => {
   const [file, setFile] = useState();
   const [formState, setFormState] = useState({
     title: '',
     content: '',
   });
 
+  // Both of these are returning the correct value
   console.log(userId);
   console.log(file);
 
@@ -16,7 +17,7 @@ const Modal = ({ userId }) => {
     e.preventDefault();
     // create post
     const postData = await axios.post(
-      'http://localhost:3001/photo-gallery/api/posts',
+      `${baseUrl}/photo-gallery/api/posts`,
       {
         ...formState,
         user_id: userId,
@@ -29,13 +30,13 @@ const Modal = ({ userId }) => {
 
     // Upload image
     const filename = await axios.post(
-      'http://localhost:3001/photo-gallery/api/posts/upload',
+      `${baseUrl}/photo-gallery/api/posts/upload`,
       data
     );
     console.log(filename);
 
     const imageData = await axios.post(
-      'http://localhost:3001/photo-gallery/api/images',
+      `${baseUrl}/photo-gallery/api/images`,
       {
         filename: filename.data,
         post_id: postData.data.id,

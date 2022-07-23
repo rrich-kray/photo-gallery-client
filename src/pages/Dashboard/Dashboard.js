@@ -55,7 +55,7 @@ const Dashboard = ({ baseUrl }) => {
       <ToggleButton toggleNav={toggleNav} />
       <div className="photo-container">
         {posts.map((post) => (
-          <Tile post={post} />
+          <Tile post={post} baseUrl={baseUrl}/>
         ))}
       </div>
     </div>

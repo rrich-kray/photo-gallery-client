@@ -1,7 +1,7 @@
 import React from 'react';
 import './Tile.css';
 
-const Tile = ({ post }) => {
+const Tile = ({ post, baseUrl }) => {
   // How could I adjust the size of each tile depending  on the viewport so that there is no whitespace on any screensize?
   // Get current viewport width; find a way to divide it evently at any viewport
   // tiles can be 100% width of column
@@ -9,7 +9,7 @@ const Tile = ({ post }) => {
     <div
       className="image-tile"
       style={{
-        backgroundImage: `url(http://localhost:3001/uploads/${post.image.filename})`,
+        backgroundImage: `url(${baseUrl}/uploads/${post.image.filename})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

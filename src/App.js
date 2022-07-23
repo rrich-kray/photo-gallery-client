@@ -14,7 +14,7 @@ import {
 } from 'react-router-dom';
 
 function App() {
-  const baseUrl = 'http://localhost:3001';
+  const baseUrl = 'https://photo-gallery-server-rrich';
   const { user } = useAuth();
   console.log(user);
   const token = localStorage.getItem('token');

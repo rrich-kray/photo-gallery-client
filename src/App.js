@@ -18,6 +18,13 @@ function App() {
   const { user } = useAuth();
   console.log(user);
   const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      localStorage.removeItem("token")
+    }
+  }, [])
+
   return (
     <div className="app flex-row justify-center align-center">
       <Router>

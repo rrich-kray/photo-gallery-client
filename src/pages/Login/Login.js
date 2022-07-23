@@ -8,7 +8,10 @@ import './Login.css';
 // The fact that a token is being created at all implies the server received the request and attempted to create a token using the data provided.
 // So route is correct.
 // That implies a problem with the data being sent.
-// is formState being updated?
+// is formState being updated? - yes
+// Server logs returning status of 200
+// Need to json.stringify data? - Axios does it by default
+// userData not being logged
 const Login = ({ baseUrl }) => {
   const [formState, setFormState] = useState({
     email: '',
@@ -64,6 +67,7 @@ const Login = ({ baseUrl }) => {
             <span>Password:</span>
             <input name="password" id="password" onChange={handleChange} />
           </div>
+        </form>
           <div className="register-btns-container" style={{ zIndex: '999' }}>
             <button
               className="register-submit-btn form-btn"
@@ -73,7 +77,6 @@ const Login = ({ baseUrl }) => {
             </button>
             {/* <button className="form-btn">Login</button> */}
           </div>
-        </form>
       </div>
       <div className="register-right-panel"></div>
     </div>

@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     // window.location.replace('/dashboard');
     dispatch({
       type: ACTIONS.LOGIN,
-      payload: { id: userData.data.user.id, email: userData.data.user.email },
+      payload: { id: userData.user.id, email: userData.user.email },
     });
   };
 

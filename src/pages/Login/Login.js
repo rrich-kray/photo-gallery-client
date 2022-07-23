@@ -11,7 +11,9 @@ import './Login.css';
 // is formState being updated? - yes
 // Server logs returning status of 200
 // Need to json.stringify data? - Axios does it by default
-// userData not being logged
+// Server is returning an empty object. Maybe it's not finding the user. 
+// Sequelize can't connect to database? No, server logs show that query is being executed.
+// Database isn't seeded online? There is no code in place that accounts for server not being able to find user. This is probably what's happening, hence why the token is returning undefined.
 const Login = ({ baseUrl }) => {
   const [formState, setFormState] = useState({
     email: '',

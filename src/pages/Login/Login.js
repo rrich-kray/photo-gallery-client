@@ -8,11 +8,14 @@ import './Login.css';
 // The fact that a token is being created at all implies the server received the request and attempted to create a token using the data provided.
 // So route is correct.
 // That implies a problem with the data being sent.
+// is formState being updated?
 const Login = ({ baseUrl }) => {
   const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
+
+  console.log(formState)
 
   const { login } = useAuth();
 

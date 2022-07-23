@@ -27,9 +27,9 @@ const Register = ({ baseUrl }) => {
         password: formState.password,
       })
       .then((userData) => {
-        console.log(userData)
+        // console.log(userData)
         login(userData.data);
-        // window.location.replace('/dashboard');
+        window.location.replace('/dashboard');
       })
       .catch((err) => {
         console.log(err);

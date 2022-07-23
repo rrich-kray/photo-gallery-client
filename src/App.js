@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react'
 import './App.css';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
@@ -19,11 +20,11 @@ function App() {
   console.log(user);
   const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      localStorage.removeItem("token")
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     localStorage.removeItem("token")
+  //   }
+  // }, [])
 
   return (
     <div className="app flex-row justify-center align-center">

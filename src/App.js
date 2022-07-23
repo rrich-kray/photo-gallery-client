@@ -14,7 +14,7 @@ import {
 } from 'react-router-dom';
 
 function App() {
-  const baseUrl = 'https://photo-gallery-server-rrich';
+  const baseUrl = 'https://photo-gallery-server-rrich.herokuapp.com';
   const { user } = useAuth();
   console.log(user);
   const token = localStorage.getItem('token');

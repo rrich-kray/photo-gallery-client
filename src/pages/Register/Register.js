@@ -11,6 +11,7 @@ const Register = ({ baseUrl }) => {
     email: '',
     password: '',
   });
+  console.log(formState)
 
   const { login } = useAuth();
 
@@ -80,7 +81,6 @@ const Register = ({ baseUrl }) => {
             >
               Register
             </button>
-            <button className="form-btn">Login</button>
           </div>
         </form>
       </div>

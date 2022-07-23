@@ -78,7 +78,6 @@ const Register = ({ baseUrl }) => {
             <span>Password:</span>
             <input name="password" id="password" onChange={handleChange} />
           </div>
-        </form>
           <div className="register-btns-container" style={{ zIndex: '999' }}>
             <button
               className="register-submit-btn form-btn"
@@ -87,6 +86,7 @@ const Register = ({ baseUrl }) => {
               Register
             </button>
           </div>
+        </form>
       </div>
       <div className="register-right-panel"></div>
     </div>

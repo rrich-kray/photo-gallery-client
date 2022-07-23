@@ -42,7 +42,7 @@ const Modal = ({ userId, baseUrl }) => {
         post_id: postData.data.id,
       }
     );
-    console.log(imageData);
+    window.location.replace('/dashboard')
   };
 
   const handleChange = (e) => {

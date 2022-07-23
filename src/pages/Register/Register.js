@@ -12,10 +12,13 @@ const Register = ({ baseUrl }) => {
     password: '',
   });
   console.log(formState)
+  // No token being created
+  formState
 
   const { login } = useAuth();
 
   const handleFormSubmit = (e) => {
+    e.preventDefault()
     axios
       .post(`${baseUrl}/photo-gallery/api/users/register`, {
         first_name: formState.first_name,
@@ -24,8 +27,9 @@ const Register = ({ baseUrl }) => {
         password: formState.password,
       })
       .then((userData) => {
+        console.log(userData)
         login(userData.data);
-        window.location.replace('/dashboard');
+        // window.location.replace('/dashboard');
       })
       .catch((err) => {
         console.log(err);
@@ -74,6 +78,7 @@ const Register = ({ baseUrl }) => {
             <span>Password:</span>
             <input name="password" id="password" onChange={handleChange} />
           </div>
+        </form>
           <div className="register-btns-container" style={{ zIndex: '999' }}>
             <button
               className="register-submit-btn form-btn"
@@ -82,7 +87,6 @@ const Register = ({ baseUrl }) => {
               Register
             </button>
           </div>
-        </form>
       </div>
       <div className="register-right-panel"></div>
     </div>

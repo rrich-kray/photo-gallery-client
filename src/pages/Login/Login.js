@@ -1,33 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import axios from 'axios';
-import './Login.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import axios from "axios";
+import "./Login.css";
 
-// Server is returning undefined token in production
-// The fact that a token is being created at all implies the server received the request and attempted to create a token using the data provided.
-// So route is correct.
-// That implies a problem with the data being sent.
-// is formState being updated? - yes
-// Server logs returning status of 200
-// Need to json.stringify data? - Axios does it by default
-// Server is returning an empty object. Maybe it's not finding the user. 
-// Sequelize can't connect to database? No, server logs show that query is being executed.
-// Database isn't seeded online? There is no code in place that accounts for server not being able to find user. This is probably what's happening, hence why the token is returning undefined.
 const Login = ({ baseUrl }) => {
   const [formState, setFormState] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  console.log(formState)
+  console.log(formState);
 
   const { login } = useAuth();
 
-  // What am I not understanding? What assumptions am I making?
-  // issue may be that the default form refresh is occurring before the attached callbacks
-  // Callbacks added with .then() will never be invoked before the completion of the current run of the JavaScript event loop.
-  // Maybe the page refresh is occuring in the event loop
   const handleFormSubmit = (e) => {
     e.preventDefault();
     axios
@@ -69,7 +55,7 @@ const Login = ({ baseUrl }) => {
             <span>Password:</span>
             <input name="password" id="password" onChange={handleChange} />
           </div>
-          <div className="register-btns-container" style={{ zIndex: '999' }}>
+          <div className="register-btns-container" style={{ zIndex: "999" }}>
             <button
               className="register-submit-btn form-btn"
               onClick={handleFormSubmit}

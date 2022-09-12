@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
-import Nav from '../../components/Nav/Nav';
-import ToggleButton from '../../components/ToggleButton/ToggleButton';
-import Tile from '../../components/Tile/Tile';
-import Modal from '../../components/Modal/Modal';
-import jwt_decode from 'jwt-decode';
-import './Dashboard.css';
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import Nav from "../../components/Nav/Nav";
+import ToggleButton from "../../components/ToggleButton/ToggleButton";
+import Tile from "../../components/Tile/Tile";
+import Modal from "../../components/Modal/Modal";
+import jwt_decode from "jwt-decode";
+import "./Dashboard.css";
 
 const Dashboard = ({ baseUrl }) => {
   const [isNavVisible, changeNavVisibility] = useState(false);
@@ -13,7 +13,7 @@ const Dashboard = ({ baseUrl }) => {
   const [activePost, setActivePost] = useState();
   const [posts, setPosts] = useState([]);
   const [navRef, setNavRef] = useState();
-  const userId = jwt_decode(localStorage.getItem('token')).data[0];
+  const userId = jwt_decode(localStorage.getItem("token")).data[0];
 
   const toggleModal = () => {
     if (!isModalVisible) {
@@ -47,15 +47,29 @@ const Dashboard = ({ baseUrl }) => {
     <div className="dashboard flex-col">
       {isNavVisible && (
         <Nav
-          links={['/dashboard', '/profile', '/logout']}
+          links={["/dashboard", "/profile", "/logout"]}
           toggleModal={toggleModal}
         />
       )}
-      {isModalVisible && <Modal userId={userId} baseUrl={baseUrl}/>}
+      {isModalVisible && <Modal userId={userId} baseUrl={baseUrl} />}
       <ToggleButton toggleNav={toggleNav} />
       <div className="photo-container">
+        {posts.length === 0 && (
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: "bold",
+            }}
+          >
+            No posts found!
+          </div>
+        )}
         {posts.map((post) => (
-          <Tile post={post} baseUrl={baseUrl}/>
+          <Tile post={post} baseUrl={baseUrl} />
         ))}
       </div>
     </div>

@@ -14,7 +14,7 @@ This repo contains the source code for the Photo Gallery project.
 
 ## Description
 
-![main screenshot](./screen1.png)
+![main screenshot](./photo-gallery.png)
 
 Photo gallery allows users to login/signup and upload photos to their own personal gallery.
 

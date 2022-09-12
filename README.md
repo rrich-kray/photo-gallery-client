@@ -28,7 +28,7 @@ https://photo-gallery-client-rrich.herokuapp.com/login
 
 The frontend utilizes React, and React Router DOM allows users to navigate among the pages. In its current build, this only includes login/signup pages for unauthenticated users, and a dashboard page for authenticated users. JSON web tokens are used to for authentication.
 
-Files are uploaded to a single directory within the server using the fileUpload middleware. Each image possesses an entry in a seperate sequelize table and is linked to its user by a user id foreign key.
+Files are uploaded to a single directory within the server using the fileUpload middleware. Images and Users and kept in seperate Sequelize tables and are linked via a foreign keys.
 
 ## Usage
 

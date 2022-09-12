@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './Modal.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./Modal.css";
 
 const Modal = ({ userId, baseUrl }) => {
   const [file, setFile] = useState();
   const [formState, setFormState] = useState({
-    title: '',
-    content: '',
+    title: "",
+    content: "",
   });
 
-  // Both of these are returning the correct value
-  console.log(userId);
-  console.log(file);
+  let config = {
+    headers: {
+      "x-access-token": localStorage.getItem("token")
+        ? localStorage.getItem("token")
+        : "",
+    },
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // create post
-    const postData = await axios.post(
-      `${baseUrl}/photo-gallery/api/posts`,
-      {
-        ...formState,
-        user_id: userId,
-      }
-    );
+    const postData = await axios.post(`${baseUrl}/photo-gallery/api/posts`, {
+      ...formState,
+      user_id: userId,
+    });
     console.log(postData);
 
     const data = new FormData();
-    data.append('file', file);
+    data.append("file", file);
 
     // Upload image
     const filename = await axios.post(
@@ -35,14 +36,11 @@ const Modal = ({ userId, baseUrl }) => {
     );
     console.log(filename);
 
-    const imageData = await axios.post(
-      `${baseUrl}/photo-gallery/api/images`,
-      {
-        filename: filename.data,
-        post_id: postData.data.id,
-      }
-    );
-    window.location.replace('/dashboard')
+    const imageData = await axios.post(`${baseUrl}/photo-gallery/api/images`, {
+      filename: filename.data,
+      post_id: postData.data.id,
+    });
+    window.location.replace("/dashboard");
   };
 
   const handleChange = (e) => {
@@ -68,7 +66,7 @@ const Modal = ({ userId, baseUrl }) => {
             type="text"
             className="title"
             name="title"
-            style={{ width: '50%', marginTop: '20px' }}
+            style={{ width: "50%", marginTop: "20px" }}
             placeholder="Post Title"
             onChange={handleChange}
           />
@@ -78,7 +76,7 @@ const Modal = ({ userId, baseUrl }) => {
             type="text"
             className="description-container"
             name="content"
-            style={{ width: '75%', height: '100px', marginTop: '20px' }}
+            style={{ width: "75%", height: "100px", marginTop: "20px" }}
             placeholder="Post Description"
             onChange={handleChange}
           />

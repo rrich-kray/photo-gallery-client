@@ -50,7 +50,7 @@ const Modal = ({ userId, baseUrl }) => {
       },
       config
     );
-    // window.location.replace("/dashboard");
+    window.location.replace("/dashboard");
   };
 
   const handleChange = (e) => {

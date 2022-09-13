@@ -15,8 +15,8 @@ import {
 } from "react-router-dom";
 
 function App() {
-  // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
-  const baseUrl = "http://localhost:3001";
+  const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
+  // const baseUrl = "http://localhost:3001";
   const { user } = useAuth();
   const token = localStorage.getItem("token");
 

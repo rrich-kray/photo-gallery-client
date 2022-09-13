@@ -20,6 +20,9 @@
   height: calc(100% - 75px);
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 500px);
-  grid-template-rows: repeat(1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
+  justify-items: center;
+  align-items: center;
+  /* grid-template-rows: repeat(1fr); */
 }

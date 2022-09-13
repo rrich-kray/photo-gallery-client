@@ -15,6 +15,14 @@ const Dashboard = ({ baseUrl }) => {
   const [navRef, setNavRef] = useState();
   const userId = jwt_decode(localStorage.getItem("token")).data[0];
 
+  let config = {
+    headers: {
+      Authorization: `Bearer ${
+        localStorage.getItem("token") ? localStorage.getItem("token") : ""
+      }`,
+    },
+  };
+
   const toggleModal = () => {
     if (!isModalVisible) {
       changeModalVisibility(true);
@@ -34,14 +42,14 @@ const Dashboard = ({ baseUrl }) => {
   useEffect(() => {
     const postsArr = [];
     axios
-      .get(`${baseUrl}/photo-gallery/api/users/${userId}`)
+      .get(`${baseUrl}/photo-gallery/api/users/${userId}`, config)
       .then((userData) => {
         userData.data.Posts.map((post) => postsArr.push(post));
         setPosts(postsArr);
       });
   }, []);
 
-  console.log(navRef);
+  console.log(posts);
 
   return (
     <div className="dashboard flex-col">
@@ -54,20 +62,21 @@ const Dashboard = ({ baseUrl }) => {
       {isModalVisible && <Modal userId={userId} baseUrl={baseUrl} />}
       <ToggleButton toggleNav={toggleNav} />
       <div className="photo-container">
-        {posts.length === 0 && (
-          <div
-            style={{
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: "bold",
-            }}
-          >
-            No posts found!
-          </div>
-        )}
+        {posts.length ||
+          (!posts === 0 && (
+            <div
+              style={{
+                height: "100%",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontWeight: "bold",
+              }}
+            >
+              No posts found!
+            </div>
+          ))}
         {posts.map((post) => (
           <Tile post={post} baseUrl={baseUrl} />
         ))}

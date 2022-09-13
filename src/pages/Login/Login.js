@@ -10,8 +10,6 @@ const Login = ({ baseUrl }) => {
     password: "",
   });
 
-  console.log(formState);
-
   const { login } = useAuth();
 
   const handleFormSubmit = (e) => {

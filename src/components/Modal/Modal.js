@@ -11,20 +11,24 @@ const Modal = ({ userId, baseUrl }) => {
 
   let config = {
     headers: {
-      "x-access-token": localStorage.getItem("token")
-        ? localStorage.getItem("token")
-        : "",
+      Authorization: `Bearer ${
+        localStorage.getItem("token") ? localStorage.getItem("token") : ""
+      }`,
     },
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // create post
-    const postData = await axios.post(`${baseUrl}/photo-gallery/api/posts`, {
-      ...formState,
-      user_id: userId,
-    });
-    console.log(postData);
+    const postData = await axios.post(
+      `${baseUrl}/photo-gallery/api/posts`,
+      {
+        ...formState,
+        user_id: userId,
+      },
+      config
+    );
 
     const data = new FormData();
     data.append("file", file);
@@ -32,15 +36,21 @@ const Modal = ({ userId, baseUrl }) => {
     // Upload image
     const filename = await axios.post(
       `${baseUrl}/photo-gallery/api/posts/upload`,
-      data
+      data,
+      config
     );
+
     console.log(filename);
 
-    const imageData = await axios.post(`${baseUrl}/photo-gallery/api/images`, {
-      filename: filename.data,
-      post_id: postData.data.id,
-    });
-    window.location.replace("/dashboard");
+    const imageData = await axios.post(
+      `${baseUrl}/photo-gallery/api/images`,
+      {
+        filename: filename.data,
+        post_id: postData.data.id,
+      },
+      config
+    );
+    // window.location.replace("/dashboard");
   };
 
   const handleChange = (e) => {

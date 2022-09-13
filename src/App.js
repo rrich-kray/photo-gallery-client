@@ -1,24 +1,24 @@
-import React, {useEffect} from 'react'
-import './App.css';
-import Landing from './pages/Landing/Landing';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
-import jwt_decode from 'jwt-decode';
-import Dashboard from './pages/Dashboard/Dashboard';
-import { useAuth } from './contexts/AuthContext';
+import React, { useEffect } from "react";
+import "./App.css";
+import Landing from "./pages/Landing/Landing";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import jwt_decode from "jwt-decode";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import { useAuth } from "./contexts/AuthContext";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
   Navigate,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 function App() {
-  const baseUrl = 'https://photo-gallery-server-rrich.herokuapp.com';
+  // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
+  const baseUrl = "http://localhost:3001";
   const { user } = useAuth();
-  console.log(user);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   // useEffect(() => {
   //   if (!localStorage.getItem("token")) {

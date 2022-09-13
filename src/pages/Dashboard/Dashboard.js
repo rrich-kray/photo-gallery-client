@@ -62,21 +62,20 @@ const Dashboard = ({ baseUrl }) => {
       {isModalVisible && <Modal userId={userId} baseUrl={baseUrl} />}
       <ToggleButton toggleNav={toggleNav} />
       <div className="photo-container">
-        {posts.length ||
-          (!posts === 0 && (
-            <div
-              style={{
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontWeight: "bold",
-              }}
-            >
-              No posts found!
-            </div>
-          ))}
+        {!posts === 0 && (
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: "bold",
+            }}
+          >
+            No posts found!
+          </div>
+        )}
         {posts.map((post) => (
           <Tile post={post} baseUrl={baseUrl} />
         ))}

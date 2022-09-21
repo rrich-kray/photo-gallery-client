@@ -1,0 +1,138 @@
+.registerLogin {
+    height: 100%;
+    width: 100%;
+    background-image: url('https://wallpaperaccess.com/full/38581.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+    display: flex
+  }
+  
+  .overlay {
+    height: 100%;
+    width: 100%;
+    /* background: rgb(0, 0, 0); */
+    background: linear-gradient(
+      65deg,
+      rgb(32, 33, 43) 40%,
+      rgb(32, 33, 43, 0.95) 50%,
+      rgb(32, 33, 43, 0.9) 60%,
+      rgb(32, 33, 43, 0.85) 70%,
+      rgb(32, 33, 43, 0.8) 80%,
+      rgb(32, 33, 43, 0.75) 90%,
+      rgb(32, 33, 43, 0.7) 100%
+    );
+    position: absolute;
+    z-index: 2;
+  }
+  
+  .register-overlay {
+    background: rgba(100, 100, 100, 0.5);
+  }
+  
+  .registerPanel {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loginFormWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .loginTextContainer {
+    /* position: absolute; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 15px;
+    z-index: 3;
+  }
+
+  .loginTextContainer :nth-child(1) {
+    color: rgba(166, 158, 158, 0.5);
+    font-weight: bold;
+    animation: fade-in-from-bottom 0.25s linear;
+  }
+  
+  .loginTextContainer :nth-child(2) {
+    /* color: white; */
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 3.5rem;
+    color: white;
+    animation: fade-in-from-bottom 0.25s linear;
+  }
+  
+  .loginTextContainer :nth-child(3) {
+    /* color: white; */
+    font-weight: bold;
+    color: rgba(166, 158, 158, 0.5);
+    animation: fade-in-from-bottom 0.25s linear;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    z-index: 3;
+  }
+  
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    width: 95%;
+    border-radius: 15px;
+    height: 45px;
+    background: rgb(44, 46, 60);
+    margin-bottom: 20px;
+  }
+  
+  .inputContainer span {
+    font-size: 0.7rem;
+    position: relative;
+    color: rgba(166, 158, 158, 0.5);
+    font-weight: bold;
+    position: relative;
+    left: 10px;
+    top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .inputContainer input {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .input-container:focus-within {
+    border: rgb(95, 140, 222);
+  }
+  
+  .form-btn {
+    border-radius: 30px;
+    height: 40px;
+    width: 200px;
+    background: rgb(95, 140, 222);
+    margin: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  

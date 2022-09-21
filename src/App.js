@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import jwt_decode from "jwt-decode";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import store from "./store";
 import { useAuth } from "./contexts/AuthContext";
 import {
   BrowserRouter as Router,
@@ -17,8 +18,9 @@ import {
 function App() {
   const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
   // const baseUrl = "http://localhost:3001";
-  const { user } = useAuth();
+  const { store } = useAuth();
   const token = localStorage.getItem("token");
+  console.log(store);
 
   // useEffect(() => {
   //   if (!localStorage.getItem("token")) {

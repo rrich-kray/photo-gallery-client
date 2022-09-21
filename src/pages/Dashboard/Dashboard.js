@@ -5,6 +5,7 @@ import ToggleButton from "../../components/ToggleButton/ToggleButton";
 import Tile from "../../components/Tile/Tile";
 import Modal from "../../components/Modal/Modal";
 import jwt_decode from "jwt-decode";
+import store from "../../store";
 import "./Dashboard.css";
 
 const Dashboard = ({ baseUrl }) => {
@@ -14,6 +15,8 @@ const Dashboard = ({ baseUrl }) => {
   const [posts, setPosts] = useState([]);
   const [navRef, setNavRef] = useState();
   const userId = jwt_decode(localStorage.getItem("token")).data[0];
+
+  console.log(store.getState());
 
   let config = {
     headers: {

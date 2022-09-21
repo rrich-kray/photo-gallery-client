@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios";
+import store from "../../store";
 import "./Login.css";
 
 const Login = ({ baseUrl }) => {
+  const [userData, setUserData] = useState();
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -12,17 +14,17 @@ const Login = ({ baseUrl }) => {
 
   const { login } = useAuth();
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${baseUrl}/photo-gallery/api/users/login`, {
+  //
+  const handleFormSubmit = async (e) => {
+    await e.preventDefault();
+    const userData = await axios.post(
+      `${baseUrl}/photo-gallery/api/users/login`,
+      {
         email: formState.email,
         password: formState.password,
-      })
-      .then((userData) => {
-        console.log(userData);
-        login(userData.data);
-      });
+      }
+    );
+    login(userData.data);
   };
 
   const handleChange = (e) => {
@@ -37,32 +39,34 @@ const Login = ({ baseUrl }) => {
     <div className="register flex-row">
       <div className="overlay"></div>
       <div className="register-left-panel flex-col justify-center align-center">
-        <div className="register-text-container flex-col justify-center align-start">
-          <span>Login to an existing account</span>
-          <h1>Welcome back!</h1>
-          <span>
-            Not a member yet? <Link to="/register">Register</Link>
-          </span>
+        <div className="register-form-wrapper">
+          <div className="register-text-container flex-col justify-center align-start">
+            <span>Login to an existing account</span>
+            <h1>Welcome back!</h1>
+            <span>
+              Not a member yet? <Link to="/register">Register</Link>
+            </span>
+          </div>
+          <form className="register-form form" onSubmit={handleFormSubmit}>
+            <div className="register-email-container input-container">
+              <span>Email:</span>
+              <input name="email" id="email" onChange={handleChange} />
+            </div>
+            <div className="register-password-container input-container">
+              <span>Password:</span>
+              <input name="password" id="password" onChange={handleChange} />
+            </div>
+            <div className="register-btns-container" style={{ zIndex: "999" }}>
+              <button
+                className="register-submit-btn form-btn"
+                onClick={handleFormSubmit}
+              >
+                Log in
+              </button>
+              {/* <button className="form-btn">Login</button> */}
+            </div>
+          </form>
         </div>
-        <form className="register-form form" onSubmit={handleFormSubmit}>
-          <div className="register-email-container input-container">
-            <span>Email:</span>
-            <input name="email" id="email" onChange={handleChange} />
-          </div>
-          <div className="register-password-container input-container">
-            <span>Password:</span>
-            <input name="password" id="password" onChange={handleChange} />
-          </div>
-          <div className="register-btns-container" style={{ zIndex: "999" }}>
-            <button
-              className="register-submit-btn form-btn"
-              onClick={handleFormSubmit}
-            >
-              Log in
-            </button>
-            {/* <button className="form-btn">Login</button> */}
-          </div>
-        </form>
       </div>
       <div className="register-right-panel"></div>
     </div>

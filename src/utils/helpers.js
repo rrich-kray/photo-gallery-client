@@ -1,19 +1,38 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const handleFormSubmit = async (e, url, type, body) => {
   e.preventDefault();
-  if (type.toLowerCase() === 'get') {
+  if (type.toLowerCase() === "get") {
     return await axios.get(url);
   }
-  if (type.toLowerCase() === 'post') {
+  if (type.toLowerCase() === "post") {
     return await axios.post(url, { ...body });
   }
-  if (type.toLowerCase() === 'put') {
+  if (type.toLowerCase() === "put") {
     return await axios.put(url, { ...body });
   }
-  if (type.toLowerCase() === 'delete') {
+  if (type.toLowerCase() === "delete") {
     return await axios.delete(url);
   }
+};
+
+export const authenticationFn = async (
+  e,
+  url,
+  reqBodyObj,
+  setStateFn,
+  setErrorFn
+) => {
+  e.preventDefault();
+
+  const userData = await axios.post(url, {
+    ...reqBodyObj,
+  });
+
+  if (userData.status === 400) {
+    setErrorFn(userData.data);
+  }
+  setStateFn(userData.data);
 };
 
 // assumes that the target element has starting top position and opacity of 0
@@ -36,7 +55,7 @@ export const fadeInFromTop = (elementRef, interval, duration, endPos) => {
     // If nav is not visible,
     if (!isNavVisible) {
       // Will end at endPos
-      elementRef.current.style.marginTop = positionCounter + 'px';
+      elementRef.current.style.marginTop = positionCounter + "px";
       elementRef.current.style.opcaity += opacityIncrement;
       positionCounter += positionIncrement;
     } else {

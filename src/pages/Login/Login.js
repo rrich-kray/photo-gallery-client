@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios";
 import store from "../../store";
-import "./Login.css";
+import styles from "./styles.module.scss";
 
 const Login = ({ baseUrl }) => {
+  const [error, setError] = useState("");
   const [userData, setUserData] = useState();
   const [formState, setFormState] = useState({
     email: "",
@@ -14,17 +15,29 @@ const Login = ({ baseUrl }) => {
 
   const { login } = useAuth();
 
-  //
   const handleFormSubmit = async (e) => {
     await e.preventDefault();
-    const userData = await axios.post(
+
+    if (!formState.email || !formState.password) {
+      setError("Email/Password cannot be blank!");
+      return;
+    }
+
+    const response = await axios.post(
       `${baseUrl}/photo-gallery/api/users/login`,
       {
         email: formState.email,
         password: formState.password,
       }
     );
-    login(userData.data);
+
+    console.log(response);
+    if (response.data.errorMessage) {
+      setError(response.data.errorMessage);
+      return;
+    }
+
+    login(response.data);
   };
 
   const handleChange = (e) => {
@@ -36,31 +49,32 @@ const Login = ({ baseUrl }) => {
   };
 
   return (
-    <div className="register flex-row">
-      <div className="overlay"></div>
-      <div className="register-left-panel flex-col justify-center align-center">
-        <div className="register-form-wrapper">
-          <div className="register-text-container flex-col justify-center align-start">
+    <div className={styles.registerLogin}>
+      <div className={styles.overlay}></div>
+      <div className={styles.formPanel}>
+        <div className={styles.formWrapper}>
+          <div className={styles.formHeader}>
             <span>Login to an existing account</span>
             <h1>Welcome back!</h1>
             <span>
               Not a member yet? <Link to="/register">Register</Link>
             </span>
           </div>
-          <form className="register-form form" onSubmit={handleFormSubmit}>
-            <div className="register-email-container input-container">
+          <form className={styles.form} onSubmit={handleFormSubmit}>
+            {error && <div className={styles.errorHandler}>{error}</div>}
+            <div className={styles.inputContainer}>
               <span>Email:</span>
               <input name="email" id="email" onChange={handleChange} />
             </div>
-            <div className="register-password-container input-container">
+            <div className={styles.inputContainer}>
               <span>Password:</span>
               <input name="password" id="password" onChange={handleChange} />
             </div>
-            <div className="register-btns-container" style={{ zIndex: "999" }}>
-              <button
-                className="register-submit-btn form-btn"
-                onClick={handleFormSubmit}
-              >
+            <div
+              className={styles.registerBtnsContainer}
+              style={{ zIndex: "999" }}
+            >
+              <button className={styles.formBtn} onClick={handleFormSubmit}>
                 Log in
               </button>
               {/* <button className="form-btn">Login</button> */}
@@ -68,7 +82,7 @@ const Login = ({ baseUrl }) => {
           </form>
         </div>
       </div>
-      <div className="register-right-panel"></div>
+      <div className={styles.formPanel}></div>
     </div>
   );
 };

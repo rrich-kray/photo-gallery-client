@@ -16,17 +16,10 @@ import {
 } from "react-router-dom";
 
 function App() {
-  const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
-  // const baseUrl = "http://localhost:3001";
+  // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
+  const baseUrl = "http://localhost:3001";
   const { store } = useAuth();
   const token = localStorage.getItem("token");
-  console.log(store);
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem("token")) {
-  //     localStorage.removeItem("token")
-  //   }
-  // }, [])
 
   return (
     <div className="app flex-row justify-center align-center">

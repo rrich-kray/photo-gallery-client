@@ -1,10 +1,8 @@
 import React from "react";
+import axios from "axios";
 import "./Tile.css";
 
 const Tile = ({ post, baseUrl }) => {
-  // How could I adjust the size of each tile depending on the viewport so that there is no whitespace on any screensize?
-  // Get current viewport width; find a way to divide it evently at any viewport
-  // tiles can be 100% width of column
   return (
     <div
       className="image-tile"
@@ -16,6 +14,15 @@ const Tile = ({ post, baseUrl }) => {
       }}
     >
       <div className="tile-content-container flex-col justify-center align-center">
+        <div
+          className="trash-icon-container"
+          onClick={async () => {
+            await axios.delete(`${baseUrl}/photo-gallery/api/posts/${post.id}`);
+            window.location.replace("/dashboard");
+          }}
+        >
+          <img src="https://www.svgrepo.com/show/120929/trash.svg" />
+        </div>
         <h1>{post.title}</h1>
         <p>
           {post.content.split(" ").length > 10

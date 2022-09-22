@@ -11,6 +11,7 @@
 }
 
 .tile-content-container {
+  position: relative;
   height: 100%;
   width: 100%;
   padding: 50px;
@@ -31,4 +32,17 @@
 
 .tile-content-container p {
   color: white;
+}
+
+.trash-icon-container {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 5%;
+  left: 5%
+}
+
+.trash-icon-container :nth-child(1) {
+  max-height: 100%;
+  max-width: 100%
 }

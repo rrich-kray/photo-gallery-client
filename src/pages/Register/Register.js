@@ -5,35 +5,43 @@ import axios from "axios";
 import styles from "../Login/styles.module.scss";
 
 const Register = ({ baseUrl }) => {
+  const [error, setError] = useState("");
   const [formState, setFormState] = useState({
     first_name: "",
     last_name: "",
     email: "",
     password: "",
   });
-  console.log(formState);
   // No token being created. Server not logging user creation process. Implies issue with frontend
   // formState logging correct value
 
   const { login } = useAuth();
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(`${baseUrl}/photo-gallery/api/users/register`, {
-        first_name: formState.first_name,
-        last_name: formState.last_name,
-        email: formState.email,
-        password: formState.password,
-      })
-      .then((userData) => {
-        // console.log(userData)
-        login(userData.data);
-        window.location.replace("/dashboard");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      !formState.email ||
+      !formState.first_name ||
+      !formState.password ||
+      !formState.last_name
+    ) {
+      setError("You cannot leave any fields blank");
+      return;
+    }
+    const response = await axios.post(
+      `${baseUrl}/photo-gallery/api/users/register`,
+      {
+        ...formState,
+      }
+    );
+
+    if (response.data.errorMessage) {
+      setError(response.data.errorMessage);
+      return;
+    }
+
+    login(response.data);
+    window.location.replace("/dashboard");
   };
 
   const handleChange = (e) => {
@@ -57,6 +65,7 @@ const Register = ({ baseUrl }) => {
             </span>
           </div>
           <form className={styles.form} onSubmit={handleFormSubmit}>
+            {error && <div className={styles.errorHandler}>{error}</div>}
             <div className={styles.registerNamesContainer}>
               <div className={styles.inputContainer}>
                 <span>First Name:</span>

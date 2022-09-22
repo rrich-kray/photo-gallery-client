@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios";
@@ -6,6 +6,7 @@ import store from "../../store";
 import styles from "./styles.module.scss";
 
 const Login = ({ baseUrl }) => {
+  const [error, setError] = useState("");
   const [userData, setUserData] = useState();
   const [formState, setFormState] = useState({
     email: "",
@@ -14,17 +15,29 @@ const Login = ({ baseUrl }) => {
 
   const { login } = useAuth();
 
-  //
   const handleFormSubmit = async (e) => {
     await e.preventDefault();
-    const userData = await axios.post(
+
+    if (!formState.email || !formState.password) {
+      setError("Email/Password cannot be blank!");
+      return;
+    }
+
+    const response = await axios.post(
       `${baseUrl}/photo-gallery/api/users/login`,
       {
         email: formState.email,
         password: formState.password,
       }
     );
-    login(userData.data);
+
+    console.log(response);
+    if (response.data.errorMessage) {
+      setError(response.data.errorMessage);
+      return;
+    }
+
+    login(response.data);
   };
 
   const handleChange = (e) => {
@@ -48,6 +61,7 @@ const Login = ({ baseUrl }) => {
             </span>
           </div>
           <form className={styles.form} onSubmit={handleFormSubmit}>
+            {error && <div className={styles.errorHandler}>{error}</div>}
             <div className={styles.inputContainer}>
               <span>Email:</span>
               <input name="email" id="email" onChange={handleChange} />

@@ -143,3 +143,17 @@
     cursor: pointer;
   }
   
+  .errorHandler {
+    height: 30px;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: red;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 0.75rem;
+  }

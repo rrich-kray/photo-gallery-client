@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "../../pages/Login/styles.module.scss";
 import "./Modal.css";
 
 const Modal = ({ userId, baseUrl }) => {
+  const [errors, setErrors] = useState([]);
   const [file, setFile] = useState();
   const [formState, setFormState] = useState({
     title: "",
@@ -19,7 +21,24 @@ const Modal = ({ userId, baseUrl }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errorsTemp = [];
 
+    if (!file) {
+      errorsTemp.push("Your post must include an image file.");
+    }
+
+    if (!formState.title) {
+      errorsTemp.push("Your post must include a title.");
+    }
+
+    if (!formState.content) {
+      errorsTemp.push("Your post must include content.");
+    }
+
+    if (errorsTemp.length > 0) {
+      setErrors(errorsTemp);
+      return;
+    }
     // create post
     const postData = await axios.post(
       `${baseUrl}/photo-gallery/api/posts`,
@@ -63,6 +82,10 @@ const Modal = ({ userId, baseUrl }) => {
 
   return (
     <div className="modal">
+      {errors &&
+        errors.map((error) => (
+          <div className={styles.errorHandler}>{error}</div>
+        ))}
       <form onSubmit={handleSubmit}>
         <input
           type="file"

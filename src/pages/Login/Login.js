@@ -4,10 +4,12 @@ import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios";
 import store from "../../store";
 import styles from "./styles.module.scss";
+import { useRecoilState } from "recoil";
+import { userState } from "../..";
 
 const Login = ({ baseUrl }) => {
   const [error, setError] = useState("");
-  const [userData, setUserData] = useState();
+  const [user, setUser] = useRecoilState(userState);
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -31,13 +33,17 @@ const Login = ({ baseUrl }) => {
       }
     );
 
-    console.log(response);
     if (response.data.errorMessage) {
       setError(response.data.errorMessage);
       return;
     }
 
-    login(response.data);
+    console.log(response);
+
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("user", JSON.stringify(response.data.user));
+
+    window.location.replace("/dashboard");
   };
 
   const handleChange = (e) => {

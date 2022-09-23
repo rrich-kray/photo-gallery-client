@@ -1,21 +1,30 @@
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import './Nav.css';
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { useRecoilState } from "recoil";
+import { userState } from "../..";
+import "./Nav.css";
 
 const Nav = ({ links, toggleModal }) => {
-  console.log(links);
+  const [user, setUser] = useRecoilState(userState);
   const { logout } = useAuth();
   return (
     <div className="nav flex-row justify-between align-center">
       {links &&
         links.map((link) => (
           <div className="link-container">
-            {link === '/logout' ? (
-              <button onClick={() => logout()}>Logout</button>
+            {link === "/logout" ? (
+              <button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  setUser({});
+                }}
+              >
+                Logout
+              </button>
             ) : (
-              <Link to={link} style={{ fontSize: '1rem' }}>
-                {link[1].toUpperCase() + link.split('').slice(2).join('')}
+              <Link to={link} style={{ fontSize: "1rem" }}>
+                {link[1].toUpperCase() + link.split("").slice(2).join("")}
               </Link>
             )}
           </div>

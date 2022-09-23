@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
 import "./App.css";
+import React, { useEffect, useState } from "react";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -7,6 +7,8 @@ import jwt_decode from "jwt-decode";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import store from "./store";
 import { useAuth } from "./contexts/AuthContext";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState } from "./index";
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,10 +18,11 @@ import {
 } from "react-router-dom";
 
 function App() {
-  const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
-  // const baseUrl = "http://localhost:3001";
-  const { store } = useAuth();
+  const [user, setUser] = useRecoilState(userState);
+  // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
+  const baseUrl = "http://localhost:3001";
   const token = localStorage.getItem("token");
+  console.log(user);
 
   return (
     <div className="app flex-row justify-center align-center">

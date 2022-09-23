@@ -66,6 +66,7 @@ const Modal = ({ userId, baseUrl }) => {
       {
         filename: filename.data,
         post_id: postData.data.id,
+        isAvatar: false,
       },
       config
     );

@@ -11,7 +11,7 @@ const Post = ({ activePost, setActivePost }) => {
       <div
         className={styles.postImage}
         style={{
-          backgroundImage: `url(http://localhost:3001/uploads/${activePost.image.filename})`,
+          backgroundImage: `url(${baseUrl}/uploads/${activePost.image.filename})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",

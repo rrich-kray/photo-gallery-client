@@ -19,8 +19,8 @@ import {
 
 function App() {
   const [user, setUser] = useRecoilState(userState);
-  // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
-  const baseUrl = "http://localhost:3001";
+  const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
+  // const baseUrl = "http://localhost:3001";
   const token = localStorage.getItem("token");
   console.log(user);
 

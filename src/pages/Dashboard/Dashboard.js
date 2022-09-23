@@ -48,9 +48,6 @@ const Dashboard = ({ baseUrl }) => {
       });
   }, []);
 
-  console.log(posts);
-  console.log(posts.filter((post) => post.image.isAvatar));
-
   return (
     <div className={styles.dashboard}>
       {isNavVisible && (
@@ -64,10 +61,11 @@ const Dashboard = ({ baseUrl }) => {
       <div className={styles.dashboardHeader}>
         <div className={styles.headerInfo}>
           <div className={styles.avatarContainer}>
-            {posts.filter((post) => post.image.isAvatar === true).length > 0 ? (
+            {posts.filter((post) => post.image.is_avatar === true).length >
+            0 ? (
               <img
                 src={`${baseUrl}/uploads/${
-                  posts.filter((post) => post.image.isAvatar === true).image
+                  posts.filter((post) => post.image.is_avatar === true).image
                     .filename
                 }`}
               ></img>

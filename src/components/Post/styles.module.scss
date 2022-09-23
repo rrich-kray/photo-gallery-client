@@ -1,0 +1,87 @@
+.post {
+    position: absolute;
+    height: 90vh;
+    width: 90vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 999;
+    top: 0;
+    margin-top: auto;
+    left: 0;
+    margin-left: auto;
+    right: 0;
+    margin-right: auto;
+    bottom: 0;
+    margin-bottom: auto;
+    background: white;
+    border: 2px solid black;
+    transition: 0.25s linear;
+    animation: fadeIn 0.25s
+}
+
+@keyframes fadeIn {
+    0% {
+        scale: 0.90;
+        opacity: 0
+    }
+
+    100% {
+        scale: 1;
+        opacity: 1
+    }
+}
+
+.postImage {
+    height: 100%;
+    width: 100%;
+}
+
+.postInfo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px
+}
+
+.postInfoLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.postInfoRight {
+    flex: 1
+}
+
+.comments {
+    width: 100%;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comments h1 {
+    text-align: center;
+}
+
+.comments span {
+    font-style: italic;
+}
+
+.closePost {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    height: 40px;
+    width: 40px;
+    cursor: pointer
+}
+
+.closePost img {
+    height: 100%
+}

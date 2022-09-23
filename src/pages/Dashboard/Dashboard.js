@@ -1,16 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from "axios";
 import Nav from "../../components/Nav/Nav";
 import ToggleButton from "../../components/ToggleButton/ToggleButton";
 import Tile from "../../components/Tile/Tile";
 import Modal from "../../components/Modal/Modal";
 import styles from "./styles.module.scss";
+import Post from "../../components/Post/Post";
 
 const Dashboard = ({ baseUrl }) => {
   const [isNavVisible, changeNavVisibility] = useState(false);
   const [isModalVisible, changeModalVisibility] = useState(false);
-  const [activePost, setActivePost] = useState();
   const [posts, setPosts] = useState([]);
+  const [activePost, setActivePost] = useState();
+  const [isPostVisible, setPostVisibility] = useState(false);
   const [navRef, setNavRef] = useState();
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -50,6 +52,9 @@ const Dashboard = ({ baseUrl }) => {
 
   return (
     <div className={styles.dashboard}>
+      {activePost && (
+        <Post activePost={activePost} setActivePost={setActivePost} />
+      )}
       {isNavVisible && (
         <Nav
           links={["/dashboard", "/profile", "/logout"]}
@@ -104,7 +109,13 @@ const Dashboard = ({ baseUrl }) => {
           </div>
         )}
         {posts.map((post) => (
-          <Tile post={post} baseUrl={baseUrl} />
+          <Tile
+            post={post}
+            baseUrl={baseUrl}
+            isPostVisible={isPostVisible}
+            setPostVisibility={setPostVisibility}
+            setActivePost={setActivePost}
+          />
         ))}
       </div>
     </div>

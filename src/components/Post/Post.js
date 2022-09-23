@@ -1,24 +1,39 @@
-import React from 'react';
-import './Post.css';
+import React from "react";
+import styles from "./styles.module.scss";
 
-// Two equal length columns.
-// Left column contains image
-// Right contains title, description, author.
-const Post = ({ post }) => {
+const Post = ({ activePost, setActivePost }) => {
+  console.log(activePost);
   return (
-    <div className="post flex-row">
+    <div className={styles.post}>
+      <div className={styles.closePost} onClick={() => setActivePost()}>
+        <img src="https://www.svgrepo.com/show/151290/close.svg" />
+      </div>
       <div
-        className="post-left-panel"
+        className={styles.postImage}
         style={{
-          backgroundImage: `url(http://localhost:3001/uploads/${post.image.filename})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(http://localhost:3001/uploads/${activePost.image.filename})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
         }}
       ></div>
-      <div className="post-right-panel">
-        <h1>{post.title}</h1>
-        <p>{post.content}</p>
+      <div className={styles.postInfo}>
+        <div className={styles.postInfoLeft}>
+          <h1>{activePost.title}</h1>
+        </div>
+        <div className={styles.postInfoRight}>
+          <p>{activePost.content}</p>
+        </div>
+      </div>
+      <div className={styles.comments}>
+        <h1>Comments</h1>
+        {activePost.comments.length > 0 ? (
+          activePost.comments.map((comment) => (
+            <div className={styles.comment}>{comment}</div>
+          ))
+        ) : (
+          <span>No comments yet!</span>
+        )}
       </div>
     </div>
   );

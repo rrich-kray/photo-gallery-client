@@ -2,10 +2,20 @@ import React from "react";
 import axios from "axios";
 import "./Tile.css";
 
-const Tile = ({ post, baseUrl }) => {
+const Tile = ({
+  post,
+  baseUrl,
+  isPostVisible,
+  setPostVisibility,
+  setActivePost,
+}) => {
+  console.log(isPostVisible);
   return (
     <div
       className="image-tile"
+      onClick={() => {
+        setActivePost(post);
+      }}
       style={{
         backgroundImage: `url(${baseUrl}/uploads/${post.image.filename})`,
         backgroundPosition: "center",

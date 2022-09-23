@@ -6,8 +6,6 @@ import { userState } from "../..";
 import "./Nav.css";
 
 const Nav = ({ links, toggleModal }) => {
-  const [user, setUser] = useRecoilState(userState);
-  const { logout } = useAuth();
   return (
     <div className="nav flex-row justify-between align-center">
       {links &&
@@ -17,7 +15,8 @@ const Nav = ({ links, toggleModal }) => {
               <button
                 onClick={() => {
                   localStorage.removeItem("token");
-                  setUser({});
+                  localStorage.removeItem("user");
+                  window.location.replace("/");
                 }}
               >
                 Logout

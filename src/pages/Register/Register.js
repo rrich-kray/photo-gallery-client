@@ -15,8 +15,6 @@ const Register = ({ baseUrl }) => {
   // No token being created. Server not logging user creation process. Implies issue with frontend
   // formState logging correct value
 
-  const { login } = useAuth();
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -40,7 +38,9 @@ const Register = ({ baseUrl }) => {
       return;
     }
 
-    login(response.data);
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("user", JSON.stringify(response.data.user));
+
     window.location.replace("/dashboard");
   };
 

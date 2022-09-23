@@ -49,6 +49,7 @@ const Dashboard = ({ baseUrl }) => {
   }, []);
 
   console.log(posts);
+  console.log(posts.filter((post) => post.image.isAvatar));
 
   return (
     <div className={styles.dashboard}>
@@ -62,12 +63,25 @@ const Dashboard = ({ baseUrl }) => {
       <ToggleButton toggleNav={toggleNav} />
       <div className={styles.dashboardHeader}>
         <div className={styles.headerInfo}>
-          <div className={styles.avatarContainer}></div>
+          <div className={styles.avatarContainer}>
+            {posts.filter((post) => post.image.isAvatar === true).length > 0 ? (
+              <img
+                src={`${baseUrl}/uploads/${
+                  posts.filter((post) => post.image.isAvatar === true).image
+                    .filename
+                }`}
+              ></img>
+            ) : (
+              <span style={{ textAlign: "center", fontSize: "0.75rem" }}>
+                No Avatar Set
+              </span>
+            )}
+          </div>
           <div className={styles.name}>
             <span>{`${user.first_name} ${user.last_name}`}</span>
           </div>
           <span className={styles.email}>{user.email}</span>
-          <div className={styles.following}></div>
+          <div className={styles.following}>0 Following</div>
           <button className={styles.editProfile}>Edit Profile</button>
         </div>
       </div>

@@ -13,16 +13,19 @@
   }
   
   .dashboardHeader {
-    height: 50vh;
+    height: 60vh;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    padding: 20px
   }
   
   .galleryHeader {
     height: 50px;
     width: 100%;
+    margin-bottom: 25px;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,6 +41,12 @@
   .avatarContainer {
     height: 75px;
     width: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid black
   }
 
   .avatarContainer img {
@@ -47,6 +56,15 @@
   .name {
     font-weight: bold;
     font-size: 2rem
+  }
+
+  .email {
+    font-style: italic;
+    margin-top: 10px
+  }
+
+  .following {
+    font-style: italic;
   }
 
   .editProfile {
@@ -75,10 +93,8 @@
     height: calc(100% - 75px);
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, 300px);
     grid-gap: 10px;
-    justify-items: center;
-    align-items: center;
-    /* grid-template-rows: repeat(1fr); */
+    justify-content: center;
   }
   

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 
-const Post = ({ activePost, setActivePost }) => {
+const Post = ({ activePost, setActivePost, baseUrl }) => {
   console.log(activePost);
   return (
     <div className={styles.post}>

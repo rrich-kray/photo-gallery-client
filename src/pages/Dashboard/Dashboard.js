@@ -53,7 +53,11 @@ const Dashboard = ({ baseUrl }) => {
   return (
     <div className={styles.dashboard}>
       {activePost && (
-        <Post activePost={activePost} setActivePost={setActivePost} />
+        <Post
+          activePost={activePost}
+          setActivePost={setActivePost}
+          baseUrl={baseUrl}
+        />
       )}
       {isNavVisible && (
         <Nav

@@ -13,7 +13,7 @@
   }
   
   .dashboardHeader {
-    height: 60vh;
+    height: 40%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@
   }
   
   .galleryHeader {
-    height: 50px;
+    height: 10%;
     width: 100%;
     margin-bottom: 25px;
     margin-top: 25px;
@@ -89,8 +89,8 @@
     color: gold
   }
 
-  .photoContainer {
-    height: calc(100% - 75px);
+  .gallery {
+    height: 40%;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, 300px);

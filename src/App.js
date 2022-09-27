@@ -9,6 +9,7 @@ import store from "./store";
 import { useAuth } from "./contexts/AuthContext";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userState } from "./index";
+import Main from "./pages/Main/Main";
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,12 +19,11 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [activePost, setActivePost] = useState();
   const [user, setUser] = useRecoilState(userState);
   // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
   const baseUrl = "http://localhost:3001";
   const token = localStorage.getItem("token");
-  console.log(user);
-
   return (
     <div className="app flex-row justify-center align-center">
       <Router>
@@ -61,7 +61,30 @@ function App() {
             exact
             path="/dashboard"
             element={
-              token ? <Dashboard baseUrl={baseUrl} /> : <Navigate to="/login" />
+              token ? (
+                <Dashboard
+                  baseUrl={baseUrl}
+                  activePost={activePost}
+                  setActivePost={setActivePost}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/home"
+            element={
+              token ? (
+                <Main
+                  baseUrl={baseUrl}
+                  activePost={activePost}
+                  setActivePost={setActivePost}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
         </Routes>

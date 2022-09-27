@@ -1,0 +1,98 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll
+}
+
+.searchArea {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchContainer {
+    width: 500px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchContainer input {
+    width: 90%;
+    height: 100%;
+    border-radius: 15px;
+    border: none;
+    background: rgba(154, 150, 150, 0.25)
+}
+
+.btnWrapper {
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.25s linear;
+    padding: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.searchContainer img {
+    height: 90%;
+    border: none;
+}
+
+.btnWrapper:hover {
+    background: rgba(100, 100, 100, 0.25)
+}
+
+.filterBar {
+    height: 7.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.datePanel {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.featuredPanel {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.otherPanel {
+    height: 100%;
+    width: 20%
+}
+
+.panelBtn {
+    border: none;
+    background: none;
+    font-weight: bold;
+    cursor: pointer
+}
+
+.datePanel select {
+    border: 1px solid rgba(100, 100, 100, 0.25);
+    border-radius: 5px;
+    padding: 5px
+}
+
+.gallery {
+    height: 67.5%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-gap: 10px;
+    justify-content: center;
+  }
+  

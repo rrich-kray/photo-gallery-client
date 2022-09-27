@@ -6,14 +6,17 @@ import Tile from "../../components/Tile/Tile";
 import Modal from "../../components/Modal/Modal";
 import styles from "./styles.module.scss";
 import Post from "../../components/Post/Post";
+import DashNav from "../../components/DashNav/DashNav";
 
-const Dashboard = ({ baseUrl }) => {
+const Dashboard = ({
+  baseUrl,
+  activePost,
+  setActivePost,
+  isModalVisible,
+  toggleModal,
+}) => {
   const [isNavVisible, changeNavVisibility] = useState(false);
-  const [isModalVisible, changeModalVisibility] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [activePost, setActivePost] = useState();
-  const [isPostVisible, setPostVisibility] = useState(false);
-  const [navRef, setNavRef] = useState();
   const user = JSON.parse(localStorage.getItem("user"));
 
   let config = {
@@ -22,14 +25,6 @@ const Dashboard = ({ baseUrl }) => {
         localStorage.getItem("token") ? localStorage.getItem("token") : ""
       }`,
     },
-  };
-
-  const toggleModal = () => {
-    if (!isModalVisible) {
-      changeModalVisibility(true);
-      return;
-    }
-    changeModalVisibility(false);
   };
 
   const toggleNav = () => {
@@ -59,14 +54,18 @@ const Dashboard = ({ baseUrl }) => {
           baseUrl={baseUrl}
         />
       )}
-      {isNavVisible && (
+      <DashNav
+        links={["Home", "Dashboard", "Create Post"]}
+        toggleModal={toggleModal}
+      />
+      {/* {isNavVisible && (
         <Nav
           links={["/dashboard", "/profile", "/logout"]}
           toggleModal={toggleModal}
         />
-      )}
+      )} */}
       {isModalVisible && <Modal userId={user.id} baseUrl={baseUrl} />}
-      <ToggleButton toggleNav={toggleNav} />
+      {/* <ToggleButton toggleNav={toggleNav} /> */}
       <div className={styles.dashboardHeader}>
         <div className={styles.headerInfo}>
           <div className={styles.avatarContainer}>
@@ -97,8 +96,8 @@ const Dashboard = ({ baseUrl }) => {
         <button className={styles.galleryHeaderBtn}>Liked Posts</button>
         <button className={styles.galleryHeaderBtn}>Saved Posts</button>
       </div>
-      <div className={styles.photoContainer}>
-        {!posts === 0 && (
+      <div className={styles.gallery}>
+        {posts.length === 0 && (
           <div
             style={{
               height: "100%",
@@ -113,13 +112,7 @@ const Dashboard = ({ baseUrl }) => {
           </div>
         )}
         {posts.map((post) => (
-          <Tile
-            post={post}
-            baseUrl={baseUrl}
-            isPostVisible={isPostVisible}
-            setPostVisibility={setPostVisibility}
-            setActivePost={setActivePost}
-          />
+          <Tile post={post} baseUrl={baseUrl} setActivePost={setActivePost} />
         ))}
       </div>
     </div>

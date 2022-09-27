@@ -5,7 +5,13 @@ import Tile from "../../components/Tile/Tile";
 import Post from "../../components/Post/Post";
 import DashNav from "../../components/DashNav/DashNav";
 
-const Main = ({ baseUrl, activePost, setActivePost }) => {
+const Main = ({
+  baseUrl,
+  activePost,
+  setActivePost,
+  isModalVisible,
+  toggleModal,
+}) => {
   const [formState, setFormState] = useState({
     search: "",
   });
@@ -39,7 +45,10 @@ const Main = ({ baseUrl, activePost, setActivePost }) => {
 
   return (
     <div className={styles.main}>
-      <DashNav links={["Home", "Dashboard", "Create Post"]} />
+      <DashNav
+        links={["Home", "Dashboard", "Create Post"]}
+        toggleModal={toggleModal}
+      />
       {activePost && (
         <Post activePost={activePost} setActivePost={setActivePost} />
       )}

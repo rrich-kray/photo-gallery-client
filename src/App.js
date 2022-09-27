@@ -95,6 +95,7 @@ function App() {
                   activePost={activePost}
                   setActivePost={setActivePost}
                   toggleModal={toggleModal}
+                  isModalVisible={isModalVisible}
                 />
               ) : (
                 <Navigate to="/login" />

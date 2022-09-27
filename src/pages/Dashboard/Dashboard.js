@@ -6,10 +6,16 @@ import Tile from "../../components/Tile/Tile";
 import Modal from "../../components/Modal/Modal";
 import styles from "./styles.module.scss";
 import Post from "../../components/Post/Post";
+import DashNav from "../../components/DashNav/DashNav";
 
-const Dashboard = ({ baseUrl, activePost, setActivePost }) => {
+const Dashboard = ({
+  baseUrl,
+  activePost,
+  setActivePost,
+  isModalVisible,
+  toggleModal,
+}) => {
   const [isNavVisible, changeNavVisibility] = useState(false);
-  const [isModalVisible, changeModalVisibility] = useState(false);
   const [posts, setPosts] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -19,14 +25,6 @@ const Dashboard = ({ baseUrl, activePost, setActivePost }) => {
         localStorage.getItem("token") ? localStorage.getItem("token") : ""
       }`,
     },
-  };
-
-  const toggleModal = () => {
-    if (!isModalVisible) {
-      changeModalVisibility(true);
-      return;
-    }
-    changeModalVisibility(false);
   };
 
   const toggleNav = () => {
@@ -52,14 +50,18 @@ const Dashboard = ({ baseUrl, activePost, setActivePost }) => {
       {activePost && (
         <Post activePost={activePost} setActivePost={setActivePost} />
       )}
-      {isNavVisible && (
+      <DashNav
+        links={["Home", "Dashboard", "Create Post"]}
+        toggleModal={toggleModal}
+      />
+      {/* {isNavVisible && (
         <Nav
           links={["/dashboard", "/profile", "/logout"]}
           toggleModal={toggleModal}
         />
-      )}
+      )} */}
       {isModalVisible && <Modal userId={user.id} baseUrl={baseUrl} />}
-      <ToggleButton toggleNav={toggleNav} />
+      {/* <ToggleButton toggleNav={toggleNav} /> */}
       <div className={styles.dashboardHeader}>
         <div className={styles.headerInfo}>
           <div className={styles.avatarContainer}>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import axios from "axios";
 import Tile from "../../components/Tile/Tile";
+import Post from "../../components/Post/Post";
+import DashNav from "../../components/DashNav/DashNav";
 
 const Main = ({ baseUrl, activePost, setActivePost }) => {
   const [formState, setFormState] = useState({
@@ -37,6 +39,10 @@ const Main = ({ baseUrl, activePost, setActivePost }) => {
 
   return (
     <div className={styles.main}>
+      <DashNav links={["Home", "Dashboard", "Create Post"]} />
+      {activePost && (
+        <Post activePost={activePost} setActivePost={setActivePost} />
+      )}
       <section className={styles.searchArea}>
         <div className={styles.searchContainer}>
           <input
@@ -61,9 +67,9 @@ const Main = ({ baseUrl, activePost, setActivePost }) => {
           </select>
         </div>
         <div className={styles.featuredPanel}>
+          <button className={styles.panelBtn}>All Posts</button>
           <button className={styles.panelBtn}>Featured</button>
-          <button className={styles.panelBtn}>Most Likes</button>
-          {/* <button className={styles.panelBtn}></button> */}
+          <button className={styles.panelBtn}>Most Liked</button>
         </div>
         <div className={styles.otherPanel}></div>
       </section>

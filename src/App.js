@@ -9,6 +9,7 @@ import store from "./store";
 import { useAuth } from "./contexts/AuthContext";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userState } from "./index";
+import Modal from "./components/Modal/Modal";
 import Main from "./pages/Main/Main";
 import {
   BrowserRouter as Router,
@@ -19,13 +20,23 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [isModalVisible, changeModalVisibility] = useState(false);
   const [activePost, setActivePost] = useState();
-  const [user, setUser] = useRecoilState(userState);
   // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
   const baseUrl = "http://localhost:3001";
   const token = localStorage.getItem("token");
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
+
+  const toggleModal = () => {
+    if (!isModalVisible) {
+      changeModalVisibility(true);
+      return;
+    }
+    changeModalVisibility(false);
+  };
   return (
     <div className="app flex-row justify-center align-center">
+      {isModalVisible && <Modal userId={userId} baseUrl={baseUrl} />}
       <Router>
         <Routes>
           <Route
@@ -66,6 +77,8 @@ function App() {
                   baseUrl={baseUrl}
                   activePost={activePost}
                   setActivePost={setActivePost}
+                  isModalVisible={isModalVisible}
+                  toggleModal={toggleModal}
                 />
               ) : (
                 <Navigate to="/login" />
@@ -81,6 +94,7 @@ function App() {
                   baseUrl={baseUrl}
                   activePost={activePost}
                   setActivePost={setActivePost}
+                  toggleModal={toggleModal}
                 />
               ) : (
                 <Navigate to="/login" />

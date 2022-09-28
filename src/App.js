@@ -11,6 +11,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userState } from "./index";
 import Modal from "./components/Modal/Modal";
 import Main from "./pages/Main/Main";
+import Post from "./components/Post/Post";
 import {
   BrowserRouter as Router,
   Routes,
@@ -37,6 +38,13 @@ function App() {
   return (
     <div className="app flex-row justify-center align-center">
       {isModalVisible && <Modal userId={userId} baseUrl={baseUrl} />}
+      {activePost && (
+        <Post
+          activePost={activePost}
+          setActivePost={setActivePost}
+          baseUrl={baseUrl}
+        />
+      )}
       <Router>
         <Routes>
           <Route

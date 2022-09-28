@@ -49,9 +49,6 @@ const Main = ({
         links={["Home", "Dashboard", "Create Post"]}
         toggleModal={toggleModal}
       />
-      {activePost && (
-        <Post activePost={activePost} setActivePost={setActivePost} />
-      )}
       <section className={styles.searchArea}>
         <div className={styles.searchContainer}>
           <input

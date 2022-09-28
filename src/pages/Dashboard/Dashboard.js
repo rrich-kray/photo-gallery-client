@@ -47,13 +47,6 @@ const Dashboard = ({
 
   return (
     <div className={styles.dashboard}>
-      {activePost && (
-        <Post
-          activePost={activePost}
-          setActivePost={setActivePost}
-          baseUrl={baseUrl}
-        />
-      )}
       <DashNav
         links={["Home", "Dashboard", "Create Post"]}
         toggleModal={toggleModal}

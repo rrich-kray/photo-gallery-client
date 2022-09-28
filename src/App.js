@@ -22,8 +22,8 @@ import {
 function App() {
   const [isModalVisible, changeModalVisibility] = useState(false);
   const [activePost, setActivePost] = useState();
-  const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
-  // const baseUrl = "http://localhost:3001";
+  // const baseUrl = "https://photo-gallery-server-rrich.herokuapp.com";
+  const baseUrl = "http://localhost:3001";
   const token = localStorage.getItem("token");
   const userId = JSON.parse(localStorage.getItem("user"))?.id;
 

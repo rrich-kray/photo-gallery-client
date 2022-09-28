@@ -4,6 +4,7 @@ import styles from "../../pages/Login/styles.module.scss";
 import "./Modal.css";
 
 const Modal = ({ userId, baseUrl }) => {
+  const [isLoading, setLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   const [file, setFile] = useState();
   const [formState, setFormState] = useState({
@@ -20,57 +21,60 @@ const Modal = ({ userId, baseUrl }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const errorsTemp = [];
+    setLoading(true);
+    if (!isLoading) {
+      e.preventDefault();
+      const errorsTemp = [];
 
-    if (!file) {
-      errorsTemp.push("Your post must include an image file.");
+      if (!file) {
+        errorsTemp.push("Your post must include an image file.");
+      }
+
+      if (!formState.title) {
+        errorsTemp.push("Your post must include a title.");
+      }
+
+      if (!formState.content) {
+        errorsTemp.push("Your post must include content.");
+      }
+
+      if (errorsTemp.length > 0) {
+        setErrors(errorsTemp);
+        return;
+      }
+      // create post
+      const postData = await axios.post(
+        `${baseUrl}/photo-gallery/api/posts`,
+        {
+          ...formState,
+          user_id: userId,
+        },
+        config
+      );
+
+      const data = new FormData();
+      data.append("file", file);
+
+      // Upload image
+      const filename = await axios.post(
+        `${baseUrl}/photo-gallery/api/posts/upload`,
+        data,
+        config
+      );
+
+      console.log(filename);
+
+      const imageData = await axios.post(
+        `${baseUrl}/photo-gallery/api/images`,
+        {
+          filename: filename.data,
+          post_id: postData.data.id,
+          is_avatar: false,
+        },
+        config
+      );
+      window.location.replace("/dashboard");
     }
-
-    if (!formState.title) {
-      errorsTemp.push("Your post must include a title.");
-    }
-
-    if (!formState.content) {
-      errorsTemp.push("Your post must include content.");
-    }
-
-    if (errorsTemp.length > 0) {
-      setErrors(errorsTemp);
-      return;
-    }
-    // create post
-    const postData = await axios.post(
-      `${baseUrl}/photo-gallery/api/posts`,
-      {
-        ...formState,
-        user_id: userId,
-      },
-      config
-    );
-
-    const data = new FormData();
-    data.append("file", file);
-
-    // Upload image
-    const filename = await axios.post(
-      `${baseUrl}/photo-gallery/api/posts/upload`,
-      data,
-      config
-    );
-
-    console.log(filename);
-
-    const imageData = await axios.post(
-      `${baseUrl}/photo-gallery/api/images`,
-      {
-        filename: filename.data,
-        post_id: postData.data.id,
-        is_avatar: false,
-      },
-      config
-    );
-    window.location.replace("/dashboard");
   };
 
   const handleChange = (e) => {
@@ -116,7 +120,7 @@ const Modal = ({ userId, baseUrl }) => {
           />
         </div>
         <div>
-          <button onClick={handleSubmit}>Submit</button>
+          {!isLoading && <button onClick={handleSubmit}>Submit</button>}
         </div>
       </form>
     </div>

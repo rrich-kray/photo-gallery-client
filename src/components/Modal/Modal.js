@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "../../pages/Login/styles.module.scss";
+import { uploadFile } from "../../utils/uploadFile";
 import "./Modal.css";
 
 const Modal = ({ userId, baseUrl }) => {

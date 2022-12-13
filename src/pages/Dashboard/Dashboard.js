@@ -45,6 +45,9 @@ const Dashboard = ({
       });
   }, []);
 
+  // For each post, pull the image with the filename from the source
+  // Originally public uploads folder, don't see why I couldn't do so with AWS S3. But would have to replace with a GET request
+  // GET request would need to include the name of the file
   return (
     <div className={styles.dashboard}>
       <DashNav

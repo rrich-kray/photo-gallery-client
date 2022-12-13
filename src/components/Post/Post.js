@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles.module.scss";
+import { getFile } from "../../utils/getFile";
 
 const Post = ({ activePost, setActivePost, baseUrl }) => {
   console.log(activePost);
@@ -11,7 +12,7 @@ const Post = ({ activePost, setActivePost, baseUrl }) => {
       <div
         className={styles.postImage}
         style={{
-          backgroundImage: `url(${baseUrl}/uploads/${activePost.image.filename})`,
+          backgroundImage: `url(https://rrich-pinterest-clone-bucket.s3.amazonaws.com/${activePost.image.filename})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",

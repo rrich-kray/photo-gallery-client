@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
+import { getFile } from "../../utils/getFile";
 import "./Tile.css";
+
+// Have to include logic here that uses post.image.filename to find image in S3 bucket
 
 const Tile = ({
   post,
@@ -17,7 +20,7 @@ const Tile = ({
         setActivePost(post);
       }}
       style={{
-        backgroundImage: `url(${baseUrl}/uploads/${post.image.filename})`,
+        backgroundImage: `url(https://rrich-pinterest-clone-bucket.s3.amazonaws.com/${post.image.name})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",

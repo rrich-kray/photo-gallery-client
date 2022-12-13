@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "../../pages/Login/styles.module.scss";
-import { uploadFile } from "../../utils/uploadFile";
 import "./Modal.css";
 
 const Modal = ({ userId, baseUrl }) => {
@@ -25,6 +24,8 @@ const Modal = ({ userId, baseUrl }) => {
     setLoading(true);
     if (!isLoading) {
       e.preventDefault();
+
+      // Create a array to accumulate the errors
       const errorsTemp = [];
 
       if (!file) {
@@ -43,6 +44,7 @@ const Modal = ({ userId, baseUrl }) => {
         setErrors(errorsTemp);
         return;
       }
+
       // create post
       const postData = await axios.post(
         `${baseUrl}/photo-gallery/api/posts`,
@@ -55,17 +57,17 @@ const Modal = ({ userId, baseUrl }) => {
 
       const data = new FormData();
       data.append("file", file);
+      data.append("user");
 
-      // Upload image
+      // Upload image, return filename generated in the route
       const filename = await axios.post(
         `${baseUrl}/photo-gallery/api/posts/upload`,
         data,
         config
       );
 
-      console.log(filename);
-
-      const imageData = await axios.post(
+      // Create Image entry in Image model
+      await axios.post(
         `${baseUrl}/photo-gallery/api/images`,
         {
           filename: filename.data,

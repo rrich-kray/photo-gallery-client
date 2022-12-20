@@ -57,26 +57,28 @@ const Modal = ({ userId, baseUrl }) => {
 
       const data = new FormData();
       data.append("file", file);
-      data.append("user");
 
-      // Upload image, return filename generated in the route
-      const filename = await axios.post(
+      // Upload image, return file key generated in the route
+      const fileKey = await axios.post(
         `${baseUrl}/photo-gallery/api/posts/upload`,
         data,
         config
       );
 
+      // This isn't returning anything, so image entry cannot be created.
+      console.log(fileKey);
+
       // Create Image entry in Image model
       await axios.post(
         `${baseUrl}/photo-gallery/api/images`,
         {
-          filename: filename.data,
+          filename: fileKey.data,
           post_id: postData.data.id,
           is_avatar: false,
         },
         config
       );
-      window.location.replace("/dashboard");
+      // window.location.replace("/dashboard");
     }
   };
 

@@ -1,7 +1,7 @@
 const aws = require("aws-sdk");
 
 // import environment variables
-require("dotenv").config();
+// require("dotenv").config();
 
 module.exports.getFile = async function (filename, username) {
   const s3Obj = new aws.S3({

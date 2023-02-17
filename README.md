@@ -48,7 +48,7 @@ Email: rrich.kray.93@gmail.com
 
 GitHub: https://github.com/rrich-kray/
 
-Portfolio: https://react-portfolio-v2-rrich.herokuapp.com/
+Portfolio: https://portfolio-rho-six-93.vercel.app/
 
 ## License
 
